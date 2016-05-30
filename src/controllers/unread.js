@@ -126,4 +126,14 @@ unreadController.unreadTotal = function(req, res, next) {
 	});
 };
 
+
+unreadController.markRead = function(req, res, next) {
+	topics.markAllRead(req.uid, function (err, data) {
+		if (err) {
+			return next(err);
+		}
+		res.json(data);
+	})
+}
+
 module.exports = unreadController;

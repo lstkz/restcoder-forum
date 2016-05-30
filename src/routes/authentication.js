@@ -12,10 +12,23 @@
 		hotswap = require('../hotswap'),
 
 		loginStrategies = [];
+	var jwt = require('jwt-simple');
 
 	Auth.initialize = function(app, middleware) {
 		app.use(passport.initialize());
-		app.use(passport.session());
+
+		app.use(function (req, res, next) {
+			var cookieName = nconf.get('auth_cookie');
+			if (req.cookies && req.cookies[cookieName]) {
+				var decoded = jwt.decode(req.cookies[cookieName], nconf.get('jwt_secret'));
+				req.session.meta = {
+					datetime: new Date().getTime()
+				};
+				req.login({uid: decoded.forumUserId}, next);
+			} else {
+				next();
+			}
+		});
 
 		app.use(function(req, res, next) {
 			req.uid = req.user ? parseInt(req.user.uid, 10) : 0;
@@ -35,7 +48,6 @@
 		router.hotswapId = 'auth';
 
 		loginStrategies.length = 0;
-
 		if (plugins.hasListeners('action:auth.overrideLogin')) {
 			winston.warn('[authentication] Login override detected, skipping local login strategy.');
 			plugins.fireHook('action:auth.overrideLogin');

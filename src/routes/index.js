@@ -48,6 +48,7 @@ function topicRoutes(app, middleware, controllers) {
 
 function postRoutes(app, middleware, controllers) {
 	setupPageRoute(app, '/post/:pid', middleware, [], controllers.posts.redirectToPost);
+	setupPageRoute(app, '/raw-post/:pid', middleware, [], controllers.posts.getRawPost);
 }
 
 function tagRoutes(app, middleware, controllers) {
@@ -60,6 +61,7 @@ function categoryRoutes(app, middleware, controllers) {
 	setupPageRoute(app, '/popular/:term?', middleware, [], controllers.popular.get);
 	setupPageRoute(app, '/recent', middleware, [], controllers.recent.get);
 	setupPageRoute(app, '/unread/:filter?', middleware, [middleware.authenticate], controllers.unread.get);
+	app.post('/api/mark-read', [middleware.authenticate], controllers.unread.markRead);
 
 	setupPageRoute(app, '/category/:category_id/:slug/:topic_index', middleware, [], controllers.category.get);
 	setupPageRoute(app, '/category/:category_id/:slug?', middleware, [], controllers.category.get);

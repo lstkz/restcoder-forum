@@ -121,6 +121,7 @@ function start() {
 	nconf.set('secure', urlObject.protocol === 'https');
 	nconf.set('use_port', !!urlObject.port);
 	nconf.set('relative_path', relativePath);
+	nconf.set('main_site_url', 'http://localhost:3000/');
 	nconf.set('port', urlObject.port || nconf.get('port') || nconf.get('PORT') || 4567);
 	nconf.set('upload_url', '/uploads/');
 
