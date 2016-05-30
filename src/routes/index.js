@@ -44,6 +44,7 @@ function globalModRoutes(app, middleware, controllers) {
 function topicRoutes(app, middleware, controllers) {
 	setupPageRoute(app, '/topic/:topic_id/:slug/:post_index?', middleware, [], controllers.topics.get);
 	setupPageRoute(app, '/topic/:topic_id/:slug?', middleware, [], controllers.topics.get);
+	app.post('/api/topic/:tid/watch', [middleware.authenticate], controllers.topics.changeWatching);
 }
 
 function postRoutes(app, middleware, controllers) {
@@ -62,6 +63,8 @@ function categoryRoutes(app, middleware, controllers) {
 	setupPageRoute(app, '/recent', middleware, [], controllers.recent.get);
 	setupPageRoute(app, '/unread/:filter?', middleware, [middleware.authenticate], controllers.unread.get);
 	app.post('/api/mark-read', [middleware.authenticate], controllers.unread.markRead);
+	app.post('/api/category/:category_id/watch', [middleware.authenticate], controllers.category.watchCategory);
+	app.delete('/api/category/:category_id/watch', [middleware.authenticate], controllers.category.ignoreCategory);
 
 	setupPageRoute(app, '/category/:category_id/:slug/:topic_index', middleware, [], controllers.category.get);
 	setupPageRoute(app, '/category/:category_id/:slug?', middleware, [], controllers.category.get);

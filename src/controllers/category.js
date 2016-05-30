@@ -203,4 +203,24 @@ categoryController.get = function(req, res, callback) {
 };
 
 
+categoryController.ignoreCategory = function(req, res, callback) {
+	user.ignoreCategory(req.uid, req.params.category_id, function (err) {
+		if (err) {
+			callback(err);
+		} else {
+			res.end();
+		}
+	});
+};
+
+categoryController.watchCategory = function(req, res, callback) {
+	user.watchCategory(req.uid, req.params.category_id, function (err) {
+		if (err) {
+			callback(err);
+		} else {
+			res.end();
+		}
+	});
+};
+
 module.exports = categoryController;

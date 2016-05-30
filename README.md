@@ -80,3 +80,13 @@ Check **Paginate topics and posts instead of using infinite scroll.**
 ## Plugins -> Write API
 - Generate User token for **uid** `1`
 - Generate master token
+
+
+## Redis commands:
+display all values of user: `hgetall user:1`
+update: 
+```
+hset user:1 username your_username
+hset user:1 userslug your_username
+hset user:1 email your@email.com
+```

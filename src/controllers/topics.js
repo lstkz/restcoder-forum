@@ -363,4 +363,20 @@ topicsController.pagination = function(req, res, callback) {
 	});
 };
 
+
+topicsController.changeWatching = function (req, res, callback) {
+	var commands = ['follow', 'unfollow', 'ignore'];
+	var command = req.body.command;
+	if (commands.indexOf(command) === -1) {
+		return callback(new Error('invalid command'));
+	}
+	topics[command](req.params.tid, req.uid, function (err) {
+		if (err) {
+			callback(err);
+		} else {
+			res.end();
+		}
+	});
+};
+
 module.exports = topicsController;
