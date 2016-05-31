@@ -78,6 +78,16 @@ usersController.renderUsersPage = function(set, req, res, next) {
 	});
 };
 
+usersController.getCurrentUser = function (req, res, next) {
+	user.getUserData(req.uid, function (err, currentUser) {
+		if (err) {
+			next(err);
+		} else {
+			res.json(currentUser);
+		}
+	});
+};
+
 usersController.getUsers = function(set, uid, page, callback) {
 	var setToTitles = {
 		'users:postcount': '[[pages:users/sort-posts]]',

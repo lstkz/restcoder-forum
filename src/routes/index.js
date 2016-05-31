@@ -74,6 +74,7 @@ function userRoutes(app, middleware, controllers) {
 	var middlewares = [middleware.checkGlobalPrivacySettings];
 
 	setupPageRoute(app, '/users', middleware, middlewares, controllers.users.getUsersSortedByJoinDate);
+	app.get('/api/me', [middleware.authenticate], controllers.users.getCurrentUser);
 	setupPageRoute(app, '/users/online', middleware, middlewares, controllers.users.getOnlineUsers);
 	setupPageRoute(app, '/users/sort-posts', middleware, middlewares, controllers.users.getUsersSortedByPosts);
 	setupPageRoute(app, '/users/sort-reputation', middleware, middlewares, controllers.users.getUsersSortedByReputation);
