@@ -75,6 +75,7 @@ function userRoutes(app, middleware, controllers) {
 
 	setupPageRoute(app, '/users', middleware, middlewares, controllers.users.getUsersSortedByJoinDate);
 	app.get('/api/me', [middleware.authenticate], controllers.users.getCurrentUser);
+	app.put('/api/me', [middleware.authenticate], controllers.users.updateCurrentUser);
 	setupPageRoute(app, '/users/online', middleware, middlewares, controllers.users.getOnlineUsers);
 	setupPageRoute(app, '/users/sort-posts', middleware, middlewares, controllers.users.getUsersSortedByPosts);
 	setupPageRoute(app, '/users/sort-reputation', middleware, middlewares, controllers.users.getUsersSortedByReputation);

@@ -1,6 +1,7 @@
 "use strict";
 
 var async = require('async');
+var _ = require('underscore');
 var user = require('../user');
 var meta = require('../meta');
 
@@ -84,6 +85,16 @@ usersController.getCurrentUser = function (req, res, next) {
 			next(err);
 		} else {
 			res.json(currentUser);
+		}
+	});
+};
+
+usersController.updateCurrentUser = function (req, res, next) {
+	user.setUserFields(req.uid, _.pick(req.body, 'picture'), function (err) {
+		if (err) {
+			next(err);
+		} else {
+			res.end();
 		}
 	});
 };

@@ -90,3 +90,23 @@ hset user:1 username your_username
 hset user:1 userslug your_username
 hset user:1 email your@email.com
 ```
+
+
+## Email templates:
+- notif_post
+
+```
+<p>[[email:greeting_with_name, {username}]],</p>
+
+<p>{intro}:</p>
+<blockquote>{postBody}</blockquote>
+
+View the topic:
+<br/>
+<a href="{url}">{url}</a>
+
+<p>
+	[[email:closing]]<br />
+	<strong>{site_title}</strong>
+</p>
+```_

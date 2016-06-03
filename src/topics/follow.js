@@ -232,7 +232,7 @@ module.exports = function(Topics) {
 								site_title: meta.config.title || 'NodeBB',
 								username: data.userData.username,
 								userslug: data.userData.userslug,
-								url: nconf.get('url') + '/topic/' + postData.topic.tid,
+								url: nconf.get('url') + '/post/' + postData.pid,
 								base_url: nconf.get('url')
 							}, next);
 						} else {
