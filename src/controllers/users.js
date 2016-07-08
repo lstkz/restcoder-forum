@@ -90,7 +90,7 @@ usersController.getCurrentUser = function (req, res, next) {
 };
 
 usersController.updateCurrentUser = function (req, res, next) {
-	user.setUserFields(req.uid, _.pick(req.body, 'picture'), function (err) {
+	user.updateProfile(req.uid, _.pick(req.body, 'picture', 'email'), function (err) {
 		if (err) {
 			next(err);
 		} else {
